@@ -18,24 +18,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Display repository files
       - name: Display repository files
         run: ls -la
 
+      # 3. Run Linux Health Monitor
       - name: Run Health Monitor
         run: |
           chmod +x scripts/health_monitor.sh
           ./scripts/health_monitor.sh
 
+      # 4. Display generated health report
       - name: Display Health Report
         run: cat health_report.txt
 
+      # 5. Validate health report
       - name: Validate Health Report
         run: |
           test -f health_report.txt
           test -s health_report.txt
+
           grep -q "LINUX SYSTEM HEALTH REPORT" health_report.txt
           grep -q "HOST INFORMATION" health_report.txt
           grep -q "DISK USAGE" health_report.txt
@@ -43,10 +50,36 @@ jobs:
           grep -q "CPU LOAD" health_report.txt
           grep -q "Health report generated successfully" health_report.txt
 
+      # 6. Health check success
       - name: Health Check Passed
         run: echo "Linux Health Check PASSED"
 
-            - name: Close Agile Issue on Success
+      # 7. Generate health summary
+      - name: Generate Health Summary
+        run: |
+          chmod +x scripts/summarize_report.sh
+          ./scripts/summarize_report.sh
+
+      # 8. Display health summary
+      - name: Display Health Summary
+        run: cat summary_report.txt
+
+      # 9. Validate health summary
+      - name: Validate Health Summary
+        run: |
+          test -f summary_report.txt
+          test -s summary_report.txt
+
+          grep -q "LINUX HEALTH SUMMARY REPORT" summary_report.txt
+          grep -q "Overall Status:" summary_report.txt
+          grep -q "Recommended Action:" summary_report.txt
+
+      # 10. Summary generation success
+      - name: Health Summary Generated
+        run: echo "Health summary generated successfully"
+
+      # 11. Close Agile Issue #1 after successful CI
+      - name: Close Agile Issue on Success
         if: success()
         continue-on-error: true
         uses: actions/github-script@v7
@@ -79,14 +112,24 @@ jobs:
               }
             }
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue,
-              body: "✅ Linux Health Monitor CI passed successfully. Health report generated and validated."
-            });
+            try {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue,
+                body: "✅ Linux Health Monitor CI passed successfully. Health report generated and validated."
+              });
+
+              console.log("Success comment added to Issue #1.");
+
+            } catch (error) {
+              console.log(`Could not add success comment: ${error.message}`);
+            }
+
+      # 12. Share health summary with Agile Issue #1
       - name: Share Health Summary to Agile Issue
         if: success()
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -115,38 +158,37 @@ jobs:
             **Generated automatically by GitHub Actions.**
             `;
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 1,
-              body: body
-            });
+            try {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: 1,
+                body: body
+              });
+
+              console.log("Health summary successfully shared to Issue #1.");
+
+            } catch (error) {
+              console.log(`Could not share health summary: ${error.message}`);
+            }
+
+      # 13. Report failure to Agile Issue #1
       - name: Report Failure to Agile Issue
         if: failure()
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 1,
-              body: "❌ Linux Health Monitor CI failed. Please check the GitHub Actions logs."
-            });
-      - name: Generate Health Summary
-        run: |
-          chmod +x scripts/summarize_report.sh
-          ./scripts/summarize_report.sh
+            try {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: 1,
+                body: "❌ Linux Health Monitor CI failed. Please check the GitHub Actions logs."
+              });
 
-      - name: Display Health Summary
-        run: cat summary_report.txt
+              console.log("Failure notification added to Issue #1.");
 
-      - name: Validate Health Summary
-        run: |
-          test -f summary_report.txt
-          test -s summary_report.txt
-          grep -q "LINUX HEALTH SUMMARY REPORT" summary_report.txt
-          grep -q "Overall Status:" summary_report.txt
-          grep -q "Recommended Action:" summary_report.txt
-
-      - name: Health Summary Generated
-        run: echo "Health summary generated successfully"
+            } catch (error) {
+              console.log(`Could not notify Issue #1: ${error.message}`);
+            }
