@@ -1,4 +1,4 @@
-name: Linux Automation CI
+name: Linux Health Monitor CI
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  test:
+  health-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +20,24 @@ jobs:
       - name: Display repository files
         run: ls -la
 
-      - name: Check report file
-        run: test -f report.txt
+      - name: Run Health Monitor
+        run: |
+          chmod +x scripts/health_monitor.sh
+          ./scripts/health_monitor.sh
 
-      - name: Display report
-        run: cat report.txt
+      - name: Display Health Report
+        run: cat health_report.txt
+
+      - name: Validate Health Report
+        run: |
+          test -f health_report.txt
+          test -s health_report.txt
+          grep -q "LINUX SYSTEM HEALTH REPORT" health_report.txt
+          grep -q "HOST INFORMATION" health_report.txt
+          grep -q "DISK USAGE" health_report.txt
+          grep -q "MEMORY USAGE" health_report.txt
+          grep -q "CPU LOAD" health_report.txt
+          grep -q "Health report generated successfully" health_report.txt
+
+      - name: Health Check Passed
+        run: echo "Linux Health Check PASSED"
