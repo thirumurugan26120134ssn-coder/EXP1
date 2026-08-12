@@ -1,0 +1,47 @@
+========================================
+       LINUX SYSTEM HEALTH REPORT
+========================================
+
+Generated at: Wednesday 12 August 2026 10:14:53 AM IST
+
+---------- HOST INFORMATION ----------
+Hostname: student
+Operating System:
+PRETTY_NAME="Ubuntu 22.04.2 LTS"
+
+---------- DISK USAGE ----------
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           1.6G  2.4M  1.6G   1% /run
+/dev/nvme0n1p6   39G   15G   22G  42% /
+tmpfs           7.7G     0  7.7G   0% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+/dev/nvme0n1p1   96M   77M   20M  80% /boot/efi
+tmpfs           1.6G  120K  1.6G   1% /run/user/2101
+
+---------- MEMORY USAGE ----------
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       4.5Gi       8.2Gi       794Mi       2.6Gi        10Gi
+Swap:          2.0Gi          0B       2.0Gi
+
+---------- CPU LOAD ----------
+ 10:14:53 up  1:00,  1 user,  load average: 0.39, 0.38, 0.51
+
+---------- TOP CPU PROCESSES ----------
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+it26120+    2427 19.7  5.2 12565896 837464 ?     Sl   09:17  11:17 /snap/firefox/7084/usr/lib/firefox/firefox
+it26120+    4047 11.3  4.6 3522016 738436 ?      Sl   09:22   5:53 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41980 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {ab59875d-a685-495f-8042-cb3360d9e59f} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 20 tab
+it26120+    1941  8.0  1.8 5758300 299280 ?      Ssl  09:17   4:35 /usr/bin/gnome-shell
+it26120+    3394  1.9  3.6 3164128 583584 ?      Sl   09:17   1:06 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41836 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {431c8bdc-0589-46b4-8a14-d0ea234caacc} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 10 tab
+it26120+    4286  1.8  3.5 3135576 561956 ?      Sl   09:25   0:54 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41981 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {4f03b6f0-8665-4e80-9b2c-237324d3d4a1} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 26 tab
+
+---------- TOP MEMORY PROCESSES ----------
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+it26120+    2427 19.7  5.2 12565896 837464 ?     Sl   09:17  11:17 /snap/firefox/7084/usr/lib/firefox/firefox
+it26120+    4047 11.3  4.6 3522016 738436 ?      Sl   09:22   5:53 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41980 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {ab59875d-a685-495f-8042-cb3360d9e59f} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 20 tab
+it26120+    3394  1.9  3.6 3164128 583584 ?      Sl   09:17   1:06 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41836 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {431c8bdc-0589-46b4-8a14-d0ea234caacc} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 10 tab
+it26120+    4286  1.8  3.5 3135576 561956 ?      Sl   09:25   0:54 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:41981 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {4f03b6f0-8665-4e80-9b2c-237324d3d4a1} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 26 tab
+it26120+    4866  1.6  3.3 3114272 541296 ?      Sl   09:33   0:40 /snap/firefox/7084/usr/lib/firefox/firefox -contentproc -isForBrowser -prefsHandle 0:42033 -prefMapHandle 1:274875 -jsInitHandle 2:224660 -parentBuildID 20251017115341 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {0dc6f604-76d1-4885-bc53-a831b2fd7f35} -parentPid 2427 -crashReporter 6 -crashHelper 7 -greomni /snap/firefox/7084/usr/lib/firefox/omni.ja -appomni /snap/firefox/7084/usr/lib/firefox/browser/omni.ja -appDir /snap/firefox/7084/usr/lib/firefox/browser 32 tab
+
+========================================
+Health report generated successfully.
+========================================
