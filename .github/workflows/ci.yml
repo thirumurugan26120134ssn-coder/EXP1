@@ -1,0 +1,27 @@
+name: Linux Automation CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display repository files
+        run: ls -la
+
+      - name: Check report file
+        run: test -f report.txt
+
+      - name: Display report
+        run: cat report.txt
