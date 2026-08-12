@@ -76,3 +76,21 @@ jobs:
               issue_number: 1,
               body: "❌ Linux Health Monitor CI failed. Please check the GitHub Actions logs."
             });
+      - name: Generate Health Summary
+        run: |
+          chmod +x scripts/summarize_report.sh
+          ./scripts/summarize_report.sh
+
+      - name: Display Health Summary
+        run: cat summary_report.txt
+
+      - name: Validate Health Summary
+        run: |
+          test -f summary_report.txt
+          test -s summary_report.txt
+          grep -q "LINUX HEALTH SUMMARY REPORT" summary_report.txt
+          grep -q "Overall Status:" summary_report.txt
+          grep -q "Recommended Action:" summary_report.txt
+
+      - name: Health Summary Generated
+        run: echo "Health summary generated successfully"
